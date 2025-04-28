@@ -18,13 +18,16 @@
 	/* padding-left: 30%; */
 }
 
+
 .hm {
 	background-image: url('<%=ORSView.APP_CONTEXT%>/img/user1.jpg');
 	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background-attachment: fixed; 
 	background-size: cover;
 	padding-top: 75px;
+	
 }
+
 
 i.css {
 	border: 2px solid #8080803b;

@@ -25,7 +25,7 @@ import in.co.rays.project_3.util.HibDataSource;
 /**
  * Hibernate implements of User model
  * 
- * @author Aryan Shrivastav
+ * @author Avnish Upadhyay
  *
  */
 public class UserModelHibImp implements UserModelInt {
@@ -94,9 +94,9 @@ public class UserModelHibImp implements UserModelInt {
 		Transaction tx = null;
 		UserDTO existDto = findByLogin(dto.getLogin());
 		// Check if updated LoginId already exist
-		if (!(existDto.getId() == dto.getId())) {
+		if (existDto != null && !(existDto.getId() == dto.getId())) {
 
-			System.out.println("in duppppppppp");
+			System.out.println("in duplicate reocord  condition model update");
 			throw new DuplicateRecordException("LoginId is already exist");
 		}
 
@@ -139,7 +139,7 @@ public class UserModelHibImp implements UserModelInt {
 		try {
 			session = HibDataSource.getSession();
 			Criteria criteria = session.createCriteria(UserDTO.class);
-			criteria.add(Restrictions.eq("login", login));
+			criteria.add(Restrictions.eq("login",login));
 			List list = criteria.list();
 			if (list.size() == 1) {
 				dto = (UserDTO) list.get(0);
@@ -255,7 +255,6 @@ public class UserModelHibImp implements UserModelInt {
 		UserDTO dto = null;
 		session = HibDataSource.getSession();
 		Query q = session.createQuery("from UserDTO where login=? and password=?");
-		
 		q.setString(0, login);
 		q.setString(1, password);
 		List list = q.list();

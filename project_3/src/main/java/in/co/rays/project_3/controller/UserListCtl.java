@@ -24,7 +24,7 @@ import in.co.rays.project_3.util.ServletUtility;
 /**
  * User List functionality controller.to perform Search and List operation.
  * 
- * @author Aryan Shrivastav
+ * @author Avnish Upadhyay
  *
  */
 @WebServlet(name = "UserListCtl", urlPatterns = { "/ctl/UserListCtl" })
@@ -49,9 +49,10 @@ public class UserListCtl extends BaseCtl {
 		UserDTO dto = new UserDTO();
 
 		dto.setFirstName(DataUtility.getString(request.getParameter("firstName")));
+		dto.setGender(DataUtility.getString(request.getParameter("gender")));
 
 		dto.setLastName(DataUtility.getString(request.getParameter("lastName")));
-dto.setDob(DataUtility.getDate(request.getParameter("dob")));
+		dto.setDob(DataUtility.getDate(request.getParameter("dob")));
 		dto.setLogin(DataUtility.getString(request.getParameter("login")));
 		dto.setRoleId(DataUtility.getLong(request.getParameter("Role")));
 		populateBean(dto, request);
@@ -160,9 +161,9 @@ dto.setDob(DataUtility.getDate(request.getParameter("dob")));
 						ServletUtility.setSuccessMessage("Data Successfully Deleted!", request);
 					}
 				} else {
-					
+
 					ServletUtility.setErrorMessage("Select atleast one record", request);
-					
+
 				}
 			}
 			if (OP_BACK.equalsIgnoreCase(op)) {
@@ -172,7 +173,6 @@ dto.setDob(DataUtility.getDate(request.getParameter("dob")));
 			dto = (UserDTO) populateDTO(request);
 			System.out.println("y yyyyyyyyyy" + dto.getRoleId());
 
-               //for previous and next
 			list = model.search(dto, pageNo, pageSize);
 
 			ServletUtility.setDto(dto, request);

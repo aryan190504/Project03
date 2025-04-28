@@ -26,7 +26,7 @@ import in.co.rays.project_3.util.ServletUtility;
 
 /**
  * user functionality controller.to perform add,delete and update operation
- * @author Aryan Shrivastav
+ * @author Avnish Upadhyay
  *
  */
 @WebServlet(urlPatterns = { "/ctl/UserCtl" })
@@ -109,11 +109,11 @@ public class UserCtl extends BaseCtl {
 			pass = false;
 		}
 
-		if (DataValidator.isNull(request.getParameter("emailId"))) {
-			request.setAttribute("emailId", PropertyReader.getValue("error.require", "email Id"));
+		if (DataValidator.isNull(request.getParameter("login"))) {
+			request.setAttribute("login", PropertyReader.getValue("error.require", "Login"));
 			pass = false;
-		} else if (!DataValidator.isEmail(request.getParameter("emailId"))) {
-			request.setAttribute("emailId", PropertyReader.getValue("error.email", "Email Id "));
+		} else if (!DataValidator.isEmail(request.getParameter("login"))) {
+			request.setAttribute("login", PropertyReader.getValue("error.email", "Login"));
 			pass = false;
 		}
 		if (DataValidator.isNull(request.getParameter("dob"))) {
@@ -156,14 +156,12 @@ public class UserCtl extends BaseCtl {
 		dto.setId(DataUtility.getLong(request.getParameter("id")));
 
 		dto.setRoleId(DataUtility.getLong(request.getParameter("role")));
-		//dto.setDob(DataUtility.getDate(request.getParameter("dob")));
+		dto.setDob(DataUtility.getDate(request.getParameter("dob")));
 		dto.setFirstName(DataUtility.getString(request.getParameter("firstName")));
 
 		dto.setLastName(DataUtility.getString(request.getParameter("lastName")));
 
-		dto.setDob(DataUtility.getDate(request.getParameter("dob")));
-		
-		dto.setLogin(DataUtility.getString(request.getParameter("emailId")));
+		dto.setLogin(DataUtility.getStringData(request.getParameter("login")));
 
 		dto.setPassword(DataUtility.getString(request.getParameter("password")));
 
@@ -206,7 +204,7 @@ public class UserCtl extends BaseCtl {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String op = DataUtility.getString(request.getParameter("operation"));
-		System.out.println("-------------------------------------------------------------------------dopost run-------");
+		System.out.println("----dopost run----");
 		// get model
 		UserModelInt model = ModelFactory.getInstance().getUserModel();
 		long id = DataUtility.getLong(request.getParameter("id"));

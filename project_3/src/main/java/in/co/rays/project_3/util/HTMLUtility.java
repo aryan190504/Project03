@@ -13,7 +13,7 @@ import in.co.rays.project_3.dto.DropdownList;
 
 /**
  * HTML Utility class to produce HTML contents like Dropdown List.
- * @author Aryan Shrivastav
+ * @author Avnish Upadhyay
  *
  */
 public class HTMLUtility {

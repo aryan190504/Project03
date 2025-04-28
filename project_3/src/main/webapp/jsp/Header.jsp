@@ -9,7 +9,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Header</title>
 <link rel="stylesheet"
@@ -236,6 +235,19 @@
 							class="fa fa-user-circle"></i>Add Stock Purchase</a> <a
 							class="dropdown-item" href="<%=ORSView.STOCK_PURCHASE_LIST_CTL%>"><i
 							class="fa fa-user-friends"></i>Stock Purchase List</a>
+					</div></li>
+
+				<li class="nav-item dropdown" style="padding-left: 5px;"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> <font style="color: white;">Employee
+					</font>
+				</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="<%=ORSView.EMPLOYEE_CTL%>"><i
+							class="fa fa-user-circle"></i>Add Employee</a> <a
+							class="dropdown-item" href="<%=ORSView.EMPLOYEE_LIST_CTL%>"><i
+							class="fa fa-user-friends"></i>Employee List</a>
 					</div></li>
 				<%
 					}

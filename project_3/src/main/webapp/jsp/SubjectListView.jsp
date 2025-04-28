@@ -1,4 +1,3 @@
-
 <%@page import="in.co.rays.project_3.util.HTMLUtility"%>
 <%@page import="in.co.rays.project_3.dto.SubjectDTO"%>
 <%@page import="java.util.Iterator"%>

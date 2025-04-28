@@ -23,7 +23,7 @@ import in.co.rays.project_3.util.ServletUtility;
 
 /**
  * student functionality controller,to perform list and search operation
- * @author Aryan Shrivastav
+ * @author Avnish Upadhyay
  *
  */
 @ WebServlet(name="StudentListCtl",urlPatterns={"/ctl/StudentListCtl"})

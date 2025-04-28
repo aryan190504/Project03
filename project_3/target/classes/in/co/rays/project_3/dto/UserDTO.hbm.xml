@@ -53,12 +53,10 @@
 			<column name="REGISTEREDIP" />
 		</property>
 
-		<property name="createdBy" type="java.lang.String"
-			length="50">
+		<property name="createdBy" type="java.lang.String" length="50">
 			<column name="CREATED_BY" />
 		</property>
-		<property name="modifiedBy" type="java.lang.String"
-			length="50">
+		<property name="modifiedBy" type="java.lang.String" length="50">
 			<column name="MODIFIED_BY" />
 		</property>
 		<property name="createdDatetime" type="java.sql.Timestamp">
