@@ -15,7 +15,7 @@
       changeYear: true,
       changeMonth : true,
 		changeYear : true,
-		yearRange : '1970:2007',
+		yearRange : '1970:2025',
 		dateFormat : 'dd/mm/yy',
 		endDate : '-18y',
 			maxDate:0 
