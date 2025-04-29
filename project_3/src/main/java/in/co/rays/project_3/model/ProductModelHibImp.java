@@ -19,10 +19,11 @@ public class ProductModelHibImp implements ProductModelInt {
 	public long add(ProductDTO dto) throws ApplicationException, DuplicateRecordException {
 		Session session = null;
 		Transaction tx = null;
-//		ProductDTO duplicateCollegeName = fingByName(dto.getProductName());
-//		if (duplicateCollegeName != null) {
-//			throw new DuplicateRecordException("college name already exist");
-//		}
+		/*
+		 * ProductDTO duplicateproductName = fingByName(dto.getProductName()); if
+		 * (duplicateproductName != null) { throw new
+		 * DuplicateRecordException("Product name already exist"); }
+		 */
 		try {
 			session = HibDataSource.getSession();
 			tx = session.beginTransaction();
@@ -137,6 +138,10 @@ public class ProductModelHibImp implements ProductModelInt {
 			if (dto.getProductName() != null && dto.getProductName().length() > 0) {
 				criteria.add(Restrictions.like("productName", dto.getProductName() + "%"));
 			}
+			if (dto.getPurchaseDate() != null && dto.getPurchaseDate().getTime() > 0) {
+				criteria.add(Restrictions.like("purchaseDate", dto.getPurchaseDate() + "%"));
+			}
+
 			if (dto.getProductCategory() != null && dto.getProductCategory().length() > 0) {
 				criteria.add(Restrictions.like("productCategory", dto.getProductCategory() + "%"));
 			}

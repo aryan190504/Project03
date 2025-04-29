@@ -64,7 +64,7 @@ public class HTMLUtility {
         boolean select=true;
         if (select) {
 
-            sb.append("<option class='dropdown-item' selected value=''>------Select a "+ name +"--------</option>");
+            sb.append("<option class='dropdown-item' selected value=''>---------Select a "+ name +"----------</option>");
         }
 
         for (String key : keys) {

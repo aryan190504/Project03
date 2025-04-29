@@ -12,9 +12,11 @@ import org.apache.log4j.Logger;
 
 import in.co.rays.project_3.dto.BaseDTO;
 import in.co.rays.project_3.dto.ProductDTO;
+import in.co.rays.project_3.dto.StockPurchaseDTO;
 import in.co.rays.project_3.exception.ApplicationException;
 import in.co.rays.project_3.model.ModelFactory;
 import in.co.rays.project_3.model.ProductModelInt;
+import in.co.rays.project_3.model.StockPurchaseModelInt;
 import in.co.rays.project_3.util.DataUtility;
 import in.co.rays.project_3.util.PropertyReader;
 import in.co.rays.project_3.util.ServletUtility;
@@ -46,6 +48,7 @@ public class ProductListCtl extends BaseCtl {
 		dto.setPurchaseDate(DataUtility.getDate(request.getParameter("purchaseDate")));
 		dto.setProductCategory(request.getParameter("productCategory"));
 
+		System.out.println("product date =================>"+request.getParameter("purchaseDate"));
 		populateBean(dto, request);
 		return dto;
 	}
@@ -98,32 +101,29 @@ public class ProductListCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		log.debug("UserListCtl doPost Start");
-		List list = null;
-		List next = null;
+		System.out.println("product list do post start");
+		log.debug("product list do post start");
+		List list;
 		int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
 		int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
 
 		pageNo = (pageNo == 0) ? 1 : pageNo;
+
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
-		ProductDTO dto = (ProductDTO) populateDTO(request);
 		String op = DataUtility.getString(request.getParameter("operation"));
-		System.out.println("op---->" + op);
-
-		String[] ids = request.getParameterValues("ids");
 		ProductModelInt model = ModelFactory.getInstance().getProductModel();
+		ProductDTO dto = (ProductDTO) populateDTO(request);
+		String[] ids = request.getParameterValues("ids");
 		try {
-
-			if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op)) {
-
+			if (OP_SEARCH.equalsIgnoreCase(op) || "next".equalsIgnoreCase(op) || "previous".equalsIgnoreCase(op)) {
 				if (OP_SEARCH.equalsIgnoreCase(op)) {
 					pageNo = 1;
+
 				} else if (OP_NEXT.equalsIgnoreCase(op)) {
 					pageNo++;
-				} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
+				} else if (OP_PREVIOUS.equalsIgnoreCase(op)) {
 					pageNo--;
 				}
-
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
 				ServletUtility.redirect(ORSView.PRODUCT_CTL, request, response);
 				return;
@@ -131,56 +131,48 @@ public class ProductListCtl extends BaseCtl {
 
 				ServletUtility.redirect(ORSView.PRODUCT_LIST_CTL, request, response);
 				return;
+			} else if (OP_BACK.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.PRODUCT_LIST_CTL, request, response);
+				return;
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					ProductDTO deletedto = new ProductDTO();
+					ProductDTO deletebean = new ProductDTO();
 					for (String id : ids) {
-						deletedto.setId(DataUtility.getLong(id));
-						model.delete(deletedto);
-						ServletUtility.setSuccessMessage("Data Successfully Deleted!", request);
+						deletebean.setId(DataUtility.getLong(id));
+						model.delete(deletebean);
+						ServletUtility.setSuccessMessage("Data Delete Successfully", request);
 					}
 				} else {
-					ServletUtility.setErrorMessage("Select atleast one record", request);
+					ServletUtility.setErrorMessage("Select at least one record", request);
 				}
 			}
-			if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.PRODUCT_LIST_CTL, request, response);
-				return;
-			}
-			dto = (ProductDTO) populateDTO(request);
-
 			list = model.search(dto, pageNo, pageSize);
-
 			ServletUtility.setDto(dto, request);
-			next = model.search(dto, pageNo + 1, pageSize);
+			List next = model.search(dto, pageNo + 1, pageSize);
 
 			ServletUtility.setList(list, request);
-			ServletUtility.setList(list, request);
-			if (list == null || list.size() == 0) {
-				if (!OP_DELETE.equalsIgnoreCase(op)) {
-					ServletUtility.setErrorMessage("No record found ", request);
-				}
+			if (list == null || list.size() == 0 && !OP_DELETE.equalsIgnoreCase(op)) {
+				ServletUtility.setErrorMessage("No record found", request);
 			}
 			if (next == null || next.size() == 0) {
-				request.setAttribute("nextListSize", 0);
-
+				request.setAttribute("nextListSize", "0");
 			} else {
 				request.setAttribute("nextListSize", next.size());
 			}
+
 			ServletUtility.setList(list, request);
 			ServletUtility.setPageNo(pageNo, request);
 			ServletUtility.setPageSize(pageSize, request);
 			ServletUtility.forward(getView(), request, response);
-
 		} catch (ApplicationException e) {
 			log.error(e);
 			ServletUtility.handleException(e, request, response);
 			return;
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		log.debug("UserListCtl doGet End");
+
+		log.debug("Product list do post end");
 	}
 
 	@Override

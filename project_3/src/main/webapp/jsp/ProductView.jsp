@@ -1,3 +1,5 @@
+<%@page import="in.co.rays.project_3.util.HTMLUtility"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="in.co.rays.project_3.controller.ProductCtl"%>
 <%@page import="in.co.rays.project_3.util.DataUtility"%>
 <%@page import="in.co.rays.project_3.util.ServletUtility"%>
@@ -7,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>College View</title>
+<title>Product View</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
@@ -131,30 +133,33 @@ i.css {
 											</div>
 										</div>
 										<input type="text" name="productAmmount" class="form-control"
-											placeholder="Enter Address"
+											placeholder="Enter Ammount"
 											value="<%=DataUtility.getStringData(dto.getProductAmmount())%>">
 									</div>
 								</div>
 								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("productAmmount", request)%></font></br>
 
 
-								<span class="pl-sm-5"><b>ProductCategory</b><span
-									style="color: red;">*</span></span> </br>
-								<div class="col-sm-12">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-address-card grey-text"
-													style="font-size: 1rem;"></i>
-											</div>
-										</div>
-										<input type="text" name="productCategory" class="form-control"
-											placeholder="Enter State"
-											value="<%=DataUtility.getStringData(dto.getProductCategory())%>">
-									</div>
-								</div>
-								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("productCategory", request)%></font></br>
-
+								<span class="pl-sm-5"><b>Product Category</b><span style="color: red;">*</span></span> </br>
+							 
+	<div class="col-sm-12">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-venus-mars grey-text" style="font-size: 1rem;"></i> </div>
+        </div>
+        
+									<%
+									HashMap map = new HashMap();
+									map.put("High", "High");
+									map.put("Medium", "Medium");
+									map.put("Low", "Low");
+										String htmlList = HTMLUtility.getList("productCategory", dto.getProductCategory(), map);
+									%>
+									<%=htmlList%></div>
+      
+    </div>		
+	<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("productCategory", request)%></font></br>
+							
 								<span class="pl-sm-5"><b>PurchaseDate</b> <span
 									style="color: red;">*</span></span></br>
 								<div class="col-sm-12">
@@ -164,7 +169,7 @@ i.css {
 												<i class="fa fa-calendar grey-text" style="font-size: 1rem;"></i>
 											</div>
 										</div>
-										<input type="text" id="datepicker2" name="purchaseDate"
+										<input type="text" id="datepicker" name="purchaseDate"
 											class="form-control" placeholder="PurchaseDate"
 											readonly="readonly"
 											value="<%=DataUtility.getDateString(dto.getPurchaseDate())%>">
