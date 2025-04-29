@@ -25,7 +25,7 @@
 	 * Jasper functionality Controller. Performs operation for Print pdf of
 	 * MarksheetMeriteList
 	 *
-	 * @author Avnish Upadhyay
+	 * @author Aryan Shrivastav
 	 */
 /*
  * 

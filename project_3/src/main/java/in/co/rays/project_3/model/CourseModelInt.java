@@ -8,7 +8,7 @@ import in.co.rays.project_3.exception.ApplicationException;
 
 /**
  * Interface of Course model
- * @author Avnish Upadhyay
+ * @author Aryan Shrivastav
  *
  */
 public interface CourseModelInt {

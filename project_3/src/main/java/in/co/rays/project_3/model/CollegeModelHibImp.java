@@ -15,7 +15,7 @@ import in.co.rays.project_3.util.HibDataSource;
 
 /**
  * Hibernate implements of college model
- * @author Avnish Upadhyay
+ * @author Aryan Shrivastav
  *
  */
 public class CollegeModelHibImp implements CollegeModelInt {

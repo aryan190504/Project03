@@ -15,7 +15,7 @@ import in.co.rays.project_3.exception.ApplicationException;
 
 /**
  * EmailUtility provides the email services 
- * @author Avnish Upadhyay
+ * @author Aryan Shrivastav
  *
  */
 public class EmailUtility {
